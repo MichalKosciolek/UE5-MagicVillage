@@ -28,7 +28,7 @@ AWizard::AWizard()
 
 	// Character Movement Component configuration
 	GetCharacterMovement()->bOrientRotationToMovement = true;
-	GetCharacterMovement()->RotationRate = FRotator(0.f, 540.f, 0.f);
+	GetCharacterMovement()->RotationRate = FRotator(0.f, 450.f, 0.f);
 
 	// Controller Rotation configuration
 	bUseControllerRotationYaw = false;
@@ -84,10 +84,8 @@ void AWizard::Move(const FInputActionValue& Value)
 		FRotator ControllerRotation = Controller->GetControlRotation();
 		FRotator Yawrotaion(0.f, ControllerRotation.Yaw, 0.f);
 
-		//FVector ForwardDirection = UKismetMathLibrary::GetForwardVector(ControllerRotation);
-		//FVector RightDirection = UKismetMathLibrary::GetRightVector(ControllerRotation);
-		FVector ForwardDirection = FRotationMatrix(Yawrotaion).GetUnitAxis(EAxis::X);
-		FVector RightDirection = FRotationMatrix(Yawrotaion).GetUnitAxis(EAxis::Y);
+		FVector ForwardDirection = UKismetMathLibrary::GetForwardVector(ControllerRotation);
+		FVector RightDirection = UKismetMathLibrary::GetRightVector(ControllerRotation);
 
 		AddMovementInput(ForwardDirection, MovementVector.Y);
 		AddMovementInput(RightDirection, MovementVector.X);
