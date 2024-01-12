@@ -2,6 +2,7 @@
 
 
 #include "Wizard.h"
+#include "Staff.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -50,6 +51,14 @@ void AWizard::BeginPlay()
 			Subsystem->AddMappingContext(InputMapping, 0);
 		}
 	}
+
+	// Spawn Staff
+	if (StaffClass)
+	{
+		Staff = GetWorld()->SpawnActor<AStaff>(StaffClass);
+		Staff->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("hand_r_Staff"));
+		Staff->SetOwner(this);
+	}
 }
 
 // Called every frame
@@ -84,6 +93,7 @@ void AWizard::Move(const FInputActionValue& Value)
 		FRotator ControllerRotation = Controller->GetControlRotation();
 		FRotator Yawrotaion(0.f, ControllerRotation.Yaw, 0.f);
 
+		// Calculate movement directions
 		FVector ForwardDirection = UKismetMathLibrary::GetForwardVector(ControllerRotation);
 		FVector RightDirection = UKismetMathLibrary::GetRightVector(ControllerRotation);
 

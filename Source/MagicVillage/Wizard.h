@@ -49,4 +49,9 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Staff")
+	TSubclassOf<class AStaff> StaffClass;
+
+	UPROPERTY()
+	class AStaff* Staff;
 };

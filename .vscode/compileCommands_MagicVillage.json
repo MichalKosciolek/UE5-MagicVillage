@@ -1,57 +1,73 @@
 [
 	{
-		"file": "C:\\Unreal Projects\\MagicVillage\\Source\\MagicVillage\\MagicVillage.Build.cs",
+		"file": "C:\\Unreal Projects\\UE5-MagicVillage\\Source\\MagicVillage\\MagicVillage.Build.cs",
 		"arguments": [
 			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
-			"@C:\\Unreal Projects\\MagicVillage\\.vscode\\compileCommands_MagicVillage\\MagicVillage.1.rsp"
+			"@C:\\Unreal Projects\\UE5-MagicVillage\\.vscode\\compileCommands_MagicVillage\\MagicVillage.1.rsp"
 		],
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "C:\\Unreal Projects\\MagicVillage\\Source\\MagicVillage\\MagicVillage.cpp",
+		"file": "C:\\Unreal Projects\\UE5-MagicVillage\\Source\\MagicVillage\\MagicVillage.cpp",
 		"arguments": [
 			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
-			"@C:\\Unreal Projects\\MagicVillage\\.vscode\\compileCommands_MagicVillage\\MagicVillage.1.rsp"
+			"@C:\\Unreal Projects\\UE5-MagicVillage\\.vscode\\compileCommands_MagicVillage\\MagicVillage.1.rsp"
 		],
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "C:\\Unreal Projects\\MagicVillage\\Source\\MagicVillage\\MagicVillage.h",
+		"file": "C:\\Unreal Projects\\UE5-MagicVillage\\Source\\MagicVillage\\MagicVillage.h",
 		"arguments": [
 			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
-			"@C:\\Unreal Projects\\MagicVillage\\.vscode\\compileCommands_MagicVillage\\MagicVillage.1.rsp"
+			"@C:\\Unreal Projects\\UE5-MagicVillage\\.vscode\\compileCommands_MagicVillage\\MagicVillage.1.rsp"
 		],
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "C:\\Unreal Projects\\MagicVillage\\Source\\MagicVillage\\MagicVillageGameModeBase.cpp",
+		"file": "C:\\Unreal Projects\\UE5-MagicVillage\\Source\\MagicVillage\\MagicVillageGameModeBase.cpp",
 		"arguments": [
 			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
-			"@C:\\Unreal Projects\\MagicVillage\\.vscode\\compileCommands_MagicVillage\\MagicVillage.1.rsp"
+			"@C:\\Unreal Projects\\UE5-MagicVillage\\.vscode\\compileCommands_MagicVillage\\MagicVillage.1.rsp"
 		],
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "C:\\Unreal Projects\\MagicVillage\\Source\\MagicVillage\\MagicVillageGameModeBase.h",
+		"file": "C:\\Unreal Projects\\UE5-MagicVillage\\Source\\MagicVillage\\MagicVillageGameModeBase.h",
 		"arguments": [
 			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
-			"@C:\\Unreal Projects\\MagicVillage\\.vscode\\compileCommands_MagicVillage\\MagicVillage.1.rsp"
+			"@C:\\Unreal Projects\\UE5-MagicVillage\\.vscode\\compileCommands_MagicVillage\\MagicVillage.1.rsp"
 		],
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "C:\\Unreal Projects\\MagicVillage\\Source\\MagicVillage\\Wizard.cpp",
+		"file": "C:\\Unreal Projects\\UE5-MagicVillage\\Source\\MagicVillage\\Staff.cpp",
 		"arguments": [
 			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
-			"@C:\\Unreal Projects\\MagicVillage\\.vscode\\compileCommands_MagicVillage\\MagicVillage.1.rsp"
+			"@C:\\Unreal Projects\\UE5-MagicVillage\\.vscode\\compileCommands_MagicVillage\\MagicVillage.1.rsp"
 		],
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "C:\\Unreal Projects\\MagicVillage\\Source\\MagicVillage\\Wizard.h",
+		"file": "C:\\Unreal Projects\\UE5-MagicVillage\\Source\\MagicVillage\\Staff.h",
 		"arguments": [
 			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
-			"@C:\\Unreal Projects\\MagicVillage\\.vscode\\compileCommands_MagicVillage\\MagicVillage.1.rsp"
+			"@C:\\Unreal Projects\\UE5-MagicVillage\\.vscode\\compileCommands_MagicVillage\\MagicVillage.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Unreal Projects\\UE5-MagicVillage\\Source\\MagicVillage\\Wizard.cpp",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Unreal Projects\\UE5-MagicVillage\\.vscode\\compileCommands_MagicVillage\\MagicVillage.1.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Unreal Projects\\UE5-MagicVillage\\Source\\MagicVillage\\Wizard.h",
+		"arguments": [
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
+			"@C:\\Unreal Projects\\UE5-MagicVillage\\.vscode\\compileCommands_MagicVillage\\MagicVillage.1.rsp"
 		],
 		"directory": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source"
 	}
