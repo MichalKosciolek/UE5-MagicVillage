@@ -79,6 +79,7 @@ void AWizard::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AWizard::Move);
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AWizard::Look);
+		EnhancedInputComponent->BindAction(CastSpellAction, ETriggerEvent::Started, this, &AWizard::CastSpell);
 	}
 
 }
@@ -112,4 +113,27 @@ void AWizard::Look(const FInputActionValue& Value)
 		AddControllerYawInput(LookVector.X);
 		AddControllerPitchInput(-LookVector.Y);
 	}
+}
+
+void AWizard::CastSpell(const FInputActionValue& Value)
+{
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	if (Staff && AnimInstance && CastSpellMontage && !bIsCastingSpell)
+	{
+		Staff->CastSpell();
+		AnimInstance->Montage_Play(CastSpellMontage);
+		bIsCastingSpell = true;
+	}
+	FTimerHandle UnusedHandle;
+	GetWorldTimerManager().SetTimer(UnusedHandle, this, &AWizard::ResetIsCastingSpell, 1.0f, false);
+}
+
+bool AWizard::IsCastingSpell() const
+{
+	return bIsCastingSpell;
+}
+
+void AWizard::ResetIsCastingSpell()
+{
+	bIsCastingSpell = false;
 }

@@ -31,3 +31,8 @@ void AStaff::Tick(float DeltaTime)
 
 }
 
+void AStaff::CastSpell()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Cast Spell"));
+}
+
