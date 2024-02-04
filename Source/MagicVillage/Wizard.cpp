@@ -120,12 +120,12 @@ void AWizard::CastSpell(const FInputActionValue& Value)
 	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
 	if (Staff && AnimInstance && CastSpellMontage && !bIsCastingSpell)
 	{
+		bIsCastingSpell = true;
 		Staff->CastSpell();
 		AnimInstance->Montage_Play(CastSpellMontage);
-		bIsCastingSpell = true;
+		FTimerHandle UnusedHandle;
+		GetWorldTimerManager().SetTimer(UnusedHandle, this, &AWizard::ResetIsCastingSpell, 1.0f, false);
 	}
-	FTimerHandle UnusedHandle;
-	GetWorldTimerManager().SetTimer(UnusedHandle, this, &AWizard::ResetIsCastingSpell, 1.0f, false);
 }
 
 bool AWizard::IsCastingSpell() const

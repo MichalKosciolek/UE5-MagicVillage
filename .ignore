@@ -1,6 +1,9 @@
-/.git
-/.vscode
+/Saved
+/MagicVillage (IOS).xcworkspace
 /Content
 /DerivedDataCache
+/MagicVillage (Mac).xcworkspace
+/.git
+/.vscode
 /Intermediate
-/Saved
+/.DS_Store

@@ -1,74 +1,74 @@
 [
 	{
-		"file": "C:\\Unreal Projects\\UE5-MagicVillage\\Source\\MagicVillage\\MagicVillage.Build.cs",
+		"file": "/Users/michal/Documents/UnrealProjects/UE5-MagicVillage/Source/MagicVillage/MagicVillage.Build.cs",
 		"arguments": [
-			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
-			"@C:\\Unreal Projects\\UE5-MagicVillage\\.vscode\\compileCommands_Default\\MagicVillage.1.rsp"
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/michal/Documents/UnrealProjects/UE5-MagicVillage/.vscode/compileCommands_Default/MagicVillage.1.rsp"
 		],
-		"directory": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source"
+		"directory": "/Users/Shared/Epic Games/UE_5.3/Engine/Source"
 	},
 	{
-		"file": "C:\\Unreal Projects\\UE5-MagicVillage\\Source\\MagicVillage\\MagicVillage.cpp",
+		"file": "/Users/michal/Documents/UnrealProjects/UE5-MagicVillage/Source/MagicVillage/MagicVillage.cpp",
 		"arguments": [
-			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
-			"@C:\\Unreal Projects\\UE5-MagicVillage\\.vscode\\compileCommands_Default\\MagicVillage.1.rsp"
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/michal/Documents/UnrealProjects/UE5-MagicVillage/.vscode/compileCommands_Default/MagicVillage.1.rsp"
 		],
-		"directory": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source"
+		"directory": "/Users/Shared/Epic Games/UE_5.3/Engine/Source"
 	},
 	{
-		"file": "C:\\Unreal Projects\\UE5-MagicVillage\\Source\\MagicVillage\\MagicVillage.h",
+		"file": "/Users/michal/Documents/UnrealProjects/UE5-MagicVillage/Source/MagicVillage/MagicVillage.h",
 		"arguments": [
-			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
-			"@C:\\Unreal Projects\\UE5-MagicVillage\\.vscode\\compileCommands_Default\\MagicVillage.1.rsp"
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/michal/Documents/UnrealProjects/UE5-MagicVillage/.vscode/compileCommands_Default/MagicVillage.1.rsp"
 		],
-		"directory": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source"
+		"directory": "/Users/Shared/Epic Games/UE_5.3/Engine/Source"
 	},
 	{
-		"file": "C:\\Unreal Projects\\UE5-MagicVillage\\Source\\MagicVillage\\MagicVillageGameModeBase.cpp",
+		"file": "/Users/michal/Documents/UnrealProjects/UE5-MagicVillage/Source/MagicVillage/MagicVillageGameModeBase.cpp",
 		"arguments": [
-			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
-			"@C:\\Unreal Projects\\UE5-MagicVillage\\.vscode\\compileCommands_Default\\MagicVillage.1.rsp"
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/michal/Documents/UnrealProjects/UE5-MagicVillage/.vscode/compileCommands_Default/MagicVillage.1.rsp"
 		],
-		"directory": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source"
+		"directory": "/Users/Shared/Epic Games/UE_5.3/Engine/Source"
 	},
 	{
-		"file": "C:\\Unreal Projects\\UE5-MagicVillage\\Source\\MagicVillage\\MagicVillageGameModeBase.h",
+		"file": "/Users/michal/Documents/UnrealProjects/UE5-MagicVillage/Source/MagicVillage/MagicVillageGameModeBase.h",
 		"arguments": [
-			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
-			"@C:\\Unreal Projects\\UE5-MagicVillage\\.vscode\\compileCommands_Default\\MagicVillage.1.rsp"
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/michal/Documents/UnrealProjects/UE5-MagicVillage/.vscode/compileCommands_Default/MagicVillage.1.rsp"
 		],
-		"directory": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source"
+		"directory": "/Users/Shared/Epic Games/UE_5.3/Engine/Source"
 	},
 	{
-		"file": "C:\\Unreal Projects\\UE5-MagicVillage\\Source\\MagicVillage\\Staff.cpp",
+		"file": "/Users/michal/Documents/UnrealProjects/UE5-MagicVillage/Source/MagicVillage/Staff.cpp",
 		"arguments": [
-			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
-			"@C:\\Unreal Projects\\UE5-MagicVillage\\.vscode\\compileCommands_Default\\MagicVillage.1.rsp"
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/michal/Documents/UnrealProjects/UE5-MagicVillage/.vscode/compileCommands_Default/MagicVillage.1.rsp"
 		],
-		"directory": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source"
+		"directory": "/Users/Shared/Epic Games/UE_5.3/Engine/Source"
 	},
 	{
-		"file": "C:\\Unreal Projects\\UE5-MagicVillage\\Source\\MagicVillage\\Staff.h",
+		"file": "/Users/michal/Documents/UnrealProjects/UE5-MagicVillage/Source/MagicVillage/Staff.h",
 		"arguments": [
-			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
-			"@C:\\Unreal Projects\\UE5-MagicVillage\\.vscode\\compileCommands_Default\\MagicVillage.1.rsp"
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/michal/Documents/UnrealProjects/UE5-MagicVillage/.vscode/compileCommands_Default/MagicVillage.1.rsp"
 		],
-		"directory": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source"
+		"directory": "/Users/Shared/Epic Games/UE_5.3/Engine/Source"
 	},
 	{
-		"file": "C:\\Unreal Projects\\UE5-MagicVillage\\Source\\MagicVillage\\Wizard.cpp",
+		"file": "/Users/michal/Documents/UnrealProjects/UE5-MagicVillage/Source/MagicVillage/Wizard.cpp",
 		"arguments": [
-			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
-			"@C:\\Unreal Projects\\UE5-MagicVillage\\.vscode\\compileCommands_Default\\MagicVillage.1.rsp"
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/michal/Documents/UnrealProjects/UE5-MagicVillage/.vscode/compileCommands_Default/MagicVillage.1.rsp"
 		],
-		"directory": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source"
+		"directory": "/Users/Shared/Epic Games/UE_5.3/Engine/Source"
 	},
 	{
-		"file": "C:\\Unreal Projects\\UE5-MagicVillage\\Source\\MagicVillage\\Wizard.h",
+		"file": "/Users/michal/Documents/UnrealProjects/UE5-MagicVillage/Source/MagicVillage/Wizard.h",
 		"arguments": [
-			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\bin\\Hostx64\\x64\\cl.exe",
-			"@C:\\Unreal Projects\\UE5-MagicVillage\\.vscode\\compileCommands_Default\\MagicVillage.1.rsp"
+			"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+			"@/Users/michal/Documents/UnrealProjects/UE5-MagicVillage/.vscode/compileCommands_Default/MagicVillage.1.rsp"
 		],
-		"directory": "C:\\Program Files\\Epic Games\\UE_5.3\\Engine\\Source"
+		"directory": "/Users/Shared/Epic Games/UE_5.3/Engine/Source"
 	}
 ]
