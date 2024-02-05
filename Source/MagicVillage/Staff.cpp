@@ -3,6 +3,7 @@
 
 #include "Staff.h"
 #include "Components/StaticMeshComponent.h"
+#include "SpellProjectileBase.h"
 
 // Sets default values
 AStaff::AStaff()
@@ -15,13 +16,15 @@ AStaff::AStaff()
 
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
 	Mesh->SetupAttachment(Root);
+
+	ProjectileSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("ProjectileSpawnPoint"));
+	ProjectileSpawnPoint->SetupAttachment(Mesh);
 }
 
 // Called when the game starts or when spawned
 void AStaff::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
@@ -31,8 +34,20 @@ void AStaff::Tick(float DeltaTime)
 
 }
 
-void AStaff::CastSpell()
+void AStaff::CastSpell(TArray<TSubclassOf<ASpellProjectileBase>> AvailableSpells, int SpellIndex, AActor* TargetActor)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Cast Spell"));
+	if (AvailableSpells.IsValidIndex(SpellIndex))
+	{
+		ASpellProjectileBase* Spell = GetWorld()->SpawnActor<ASpellProjectileBase>(
+			AvailableSpells[SpellIndex], 
+			ProjectileSpawnPoint->GetComponentLocation(), 
+			ProjectileSpawnPoint->GetComponentRotation()
+			);
+			
+		if (TargetActor)
+		{
+			Spell->SetTargetActor(TargetActor);
+		}
+	}
 }
 

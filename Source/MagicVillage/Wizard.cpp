@@ -9,6 +9,7 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "SpellProjectileBase.h"
 
 // Sets default values
 AWizard::AWizard()
@@ -121,7 +122,7 @@ void AWizard::CastSpell(const FInputActionValue& Value)
 	if (Staff && AnimInstance && CastSpellMontage && !bIsCastingSpell)
 	{
 		bIsCastingSpell = true;
-		Staff->CastSpell();
+		Staff->CastSpell(AvailableSpells, 0, TargetActor);
 		AnimInstance->Montage_Play(CastSpellMontage);
 		FTimerHandle UnusedHandle;
 		GetWorldTimerManager().SetTimer(UnusedHandle, this, &AWizard::ResetIsCastingSpell, 1.0f, false);

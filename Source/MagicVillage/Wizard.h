@@ -58,14 +58,14 @@ public:
 
 	void ResetIsCastingSpell();
 
-	UPROPERTY(EditAnywhere, Category = "Animation")
-	UAnimSequence* CastSpellAnimation;
-
 	UPROPERTY(EditDefaultsOnly, Category = "Staff")
 	TSubclassOf<class AStaff> StaffClass;
 
 	UPROPERTY()
 	class AStaff* Staff;
+
+	UPROPERTY(EditAnywhere, Category = "Spells")
+	TArray<TSubclassOf<class ASpellProjectileBase>> AvailableSpells;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animation");
 	class UAnimMontage* CastSpellMontage;
@@ -73,4 +73,6 @@ public:
 private:
 	UPROPERTY(EditAnywhere)
 	bool bIsCastingSpell = false;
+
+	AActor* TargetActor = nullptr;
 };

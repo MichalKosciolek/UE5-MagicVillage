@@ -23,7 +23,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	void CastSpell();
+	void CastSpell(TArray<TSubclassOf<class ASpellProjectileBase>> AvailableSpells, int SpellIndex, AActor* TargetActor);
 
 private:
 	UPROPERTY(VisibleAnywhere)
@@ -31,5 +31,8 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category = "Mesh")
 	class UStaticMeshComponent* Mesh;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Staff", meta = (AllowPrivateAccess = "true"))
+	USceneComponent* ProjectileSpawnPoint;
 
 };
