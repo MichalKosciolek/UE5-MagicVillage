@@ -27,6 +27,7 @@ ASpellProjectileBase::ASpellProjectileBase()
 	ProjectileMovComp = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovComp"));
 	ProjectileMovComp->InitialSpeed = InitialSpeed;
 	ProjectileMovComp->MaxSpeed = MaxSpeed;
+
 }
 
 // Called when the game starts or when spawned
@@ -35,7 +36,11 @@ void ASpellProjectileBase::BeginPlay()
 	Super::BeginPlay();
 
 	BoxComp->OnComponentHit.AddDynamic(this, &ASpellProjectileBase::OnHit);
+	
+	PlayerActor = Cast<AActor>(UGameplayStatics::GetPlayerCharacter(this, 0));
+
 	ProjectileMovComp->bIsHomingProjectile = bIsHoming;
+	ProjectileMovComp->ProjectileGravityScale = GravityScale;
 
 	if (TargetActor)
 	{
@@ -46,14 +51,11 @@ void ASpellProjectileBase::BeginPlay()
 
 		FVector TargetDicection = GetActorLocation() - TargetActor->GetActorLocation();
 		FVector TargetUnitDirection = TargetDicection.GetSafeNormal();
-		//ProjectileMovComp->SetVelocityInLocalSpace(TargetUnitDirection * InitialSpeed);
 		ProjectileMovComp->Velocity = TargetUnitDirection * InitialSpeed;
 	}
 	else
 	{
-		AActor* Player = Cast<AActor>(UGameplayStatics::GetPlayerCharacter(this, 0));
-		//ProjectileMovComp->SetVelocityInLocalSpace(Player->GetActorForwardVector() * InitialSpeed);
-		ProjectileMovComp->Velocity = Player->GetActorForwardVector() * InitialSpeed;
+		ProjectileMovComp->Velocity = PlayerActor->GetActorForwardVector() * InitialSpeed;
 	}
 
 	if (TrailEffect)
@@ -77,14 +79,18 @@ void ASpellProjectileBase::SetTargetActor(AActor * Target)
 
 void ASpellProjectileBase::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	if (ImpactEffect)
+	AActor* MyOwner = GetOwner();
+	if (MyOwner && OtherActor && OtherActor != this && OtherActor != MyOwner && OtherActor != PlayerActor)
 	{
-		UGameplayStatics::SpawnEmitterAtLocation(
-			this, 
-			ImpactEffect, 
-			GetActorLocation(), 
-			GetActorRotation()
-		);
+		if (ImpactEffect)
+		{
+			UGameplayStatics::SpawnEmitterAtLocation(
+				this, 
+				ImpactEffect, 
+				GetActorLocation(), 
+				GetActorRotation()
+			);
+		}
 	}
 
 	Destroy();

@@ -21,14 +21,18 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UFUNCTION()
+	virtual void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	bool bIsHoming = false;
+	UPROPERTY(EditAnywhere, Category = "Speed")
+	float InitialSpeed = 500.f;
+	UPROPERTY(EditAnywhere, Category = "Speed")
+	float MaxSpeed = 500.f;
+	UPROPERTY(EditAnywhere, Category = "Speed")
+	float GravityScale = 0.f;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-private:
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	class UProjectileMovementComponent* ProjectileMovComp;
 	UPROPERTY(VisibleAnywhere, Category = "Components")
@@ -40,12 +44,11 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 	class UParticleSystemComponent* TrailEffect;
 
-	UPROPERTY(EditAnywhere, Category = "Speed")
-	float InitialSpeed = 500.f;
-	UPROPERTY(EditAnywhere, Category = "Speed")
-	float MaxSpeed = 500.f;
-
 	AActor* TargetActor;
+	class AActor* PlayerActor;
 
-	void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+public:	
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
 };
