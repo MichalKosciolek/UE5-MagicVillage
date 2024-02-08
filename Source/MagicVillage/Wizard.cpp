@@ -60,6 +60,8 @@ void AWizard::BeginPlay()
 		Staff->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("hand_r_Staff"));
 		Staff->SetOwner(this);
 	}
+
+	//GetMesh()->GetAnimInstance()->OnPlayMontageNotifyBegin.AddDynamic(this, &AWizard::OnSpawnProjectile);
 }
 
 // Called every frame
@@ -121,8 +123,8 @@ void AWizard::CastSpell(const FInputActionValue& Value)
 	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
 	if (Staff && AnimInstance && CastSpellMontage && !bIsCastingSpell)
 	{
+		UE_LOG(LogTemp, Warning, TEXT("AnimeMontage Play"));
 		bIsCastingSpell = true;
-		Staff->CastSpell(AvailableSpells, 0, TargetActor);
 		AnimInstance->Montage_Play(CastSpellMontage);
 		FTimerHandle UnusedHandle;
 		GetWorldTimerManager().SetTimer(UnusedHandle, this, &AWizard::ResetIsCastingSpell, 1.0f, false);
@@ -137,4 +139,18 @@ bool AWizard::IsCastingSpell() const
 void AWizard::ResetIsCastingSpell()
 {
 	bIsCastingSpell = false;
+}
+
+void AWizard::SpawnSpellProjectile()
+{
+	
+}
+
+void AWizard::OnSpawnProjectile(FName NotifyName, const FBranchingPointNotifyPayload &Payload)
+{
+	UE_LOG(LogTemp, Warning, TEXT("OnSpawnProjectile"));
+	if (NotifyName == "SpawnSpellProjectile" && Staff)
+	{
+		Staff->CastSpell(AvailableSpells, 0, TargetActor);
+	}
 }

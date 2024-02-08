@@ -58,6 +58,11 @@ void ASpellProjectileBase::BeginPlay()
 		ProjectileMovComp->Velocity = PlayerActor->GetActorForwardVector() * InitialSpeed;
 	}
 
+	if (LaunchSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, LaunchSound, GetActorLocation());
+	}
+
 	if (TrailEffect)
 	{
 		TrailEffect->Activate();
@@ -90,6 +95,11 @@ void ASpellProjectileBase::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActo
 				GetActorLocation(), 
 				GetActorRotation()
 			);
+		}
+
+		if (HitSound)
+		{
+			UGameplayStatics::PlaySoundAtLocation(this, HitSound, GetActorLocation());
 		}
 	}
 

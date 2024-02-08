@@ -51,3 +51,4 @@ void AStaff::CastSpell(TArray<TSubclassOf<ASpellProjectileBase>> AvailableSpells
 	}
 }
 
+

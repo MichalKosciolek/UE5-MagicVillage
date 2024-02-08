@@ -58,6 +58,11 @@ public:
 
 	void ResetIsCastingSpell();
 
+	UFUNCTION()
+	void SpawnSpellProjectile();
+
+	void OnSpawnProjectile(FName NotifyName, const FBranchingPointNotifyPayload& Payload);
+
 	UPROPERTY(EditDefaultsOnly, Category = "Staff")
 	TSubclassOf<class AStaff> StaffClass;
 

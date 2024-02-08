@@ -43,6 +43,10 @@ protected:
 	class UParticleSystem* ImpactEffect;
 	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 	class UParticleSystemComponent* TrailEffect;
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	class USoundBase* LaunchSound;
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	class USoundBase* HitSound;
 
 	AActor* TargetActor;
 	class AActor* PlayerActor;
