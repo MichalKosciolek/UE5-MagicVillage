@@ -75,11 +75,28 @@ void ASpellProjectileBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	CurrentDistanceFromPlayer = CalculateDistanceFromPlayer();
+	if (CurrentDistanceFromPlayer > MaxReachedDistance)
+	{
+		Destroy();
+	}
 }
 
 void ASpellProjectileBase::SetTargetActor(AActor * Target)
 {
 	TargetActor = Target;
+}
+
+float ASpellProjectileBase::CalculateDistanceFromPlayer()
+{
+	if (PlayerActor)
+	{
+		return FVector::Dist(GetActorLocation(), PlayerActor->GetActorLocation());
+	}
+	else
+	{
+		return 0.f;
+	}
 }
 
 void ASpellProjectileBase::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)

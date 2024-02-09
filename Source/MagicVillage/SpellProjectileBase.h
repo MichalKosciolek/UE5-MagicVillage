@@ -16,6 +16,7 @@ public:
 	ASpellProjectileBase();
 
 	void SetTargetActor(AActor* Target);
+	float CalculateDistanceFromPlayer();
 
 protected:
 	// Called when the game starts or when spawned
@@ -26,6 +27,8 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	bool bIsHoming = false;
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	float MaxReachedDistance = 5000.f;
 	UPROPERTY(EditAnywhere, Category = "Speed")
 	float InitialSpeed = 500.f;
 	UPROPERTY(EditAnywhere, Category = "Speed")
@@ -37,19 +40,21 @@ protected:
 	class UProjectileMovementComponent* ProjectileMovComp;
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	class UBoxComponent* BoxComp;
-	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	UPROPERTY(EditDefaultsOnly, Category = "Components")
 	class UStaticMeshComponent* SpellMesh;
-	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	UPROPERTY(EditDefaultsOnly, Category = "Effects")
 	class UParticleSystem* ImpactEffect;
-	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	UPROPERTY(EditDefaultsOnly, Category = "Effects")
 	class UParticleSystemComponent* TrailEffect;
-	UPROPERTY(EditAnywhere, Category = "Combat")
+	UPROPERTY(EditAnywhere, Category = "Sounds")
 	class USoundBase* LaunchSound;
-	UPROPERTY(EditAnywhere, Category = "Combat")
+	UPROPERTY(EditAnywhere, Category = "Sounds")
 	class USoundBase* HitSound;
 
 	AActor* TargetActor;
 	class AActor* PlayerActor;
+
+	float CurrentDistanceFromPlayer = 0.f;
 
 public:	
 	// Called every frame
