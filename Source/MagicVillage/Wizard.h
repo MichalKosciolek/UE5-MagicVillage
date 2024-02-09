@@ -53,15 +53,18 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	// Getters
+	class AStaff* GetStaff() const;
+	TArray<TSubclassOf<class ASpellProjectileBase>> GetAvailableSpells() const;
+	AActor* GetTargetActor() const;
+	float GetCurrentSpellIndex() const;
+
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	bool IsCastingSpell() const;
 
 	void ResetIsCastingSpell();
 
-	UFUNCTION()
-	void SpawnSpellProjectile();
-
-	void OnSpawnProjectile(FName NotifyName, const FBranchingPointNotifyPayload& Payload);
+private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Staff")
 	TSubclassOf<class AStaff> StaffClass;
@@ -72,12 +75,13 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Spells")
 	TArray<TSubclassOf<class ASpellProjectileBase>> AvailableSpells;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Animation");
+	UPROPERTY(EditAnywhere, Category = "Animation");
 	class UAnimMontage* CastSpellMontage;
 
-private:
 	UPROPERTY(EditAnywhere)
 	bool bIsCastingSpell = false;
+
+	float CurrentSpellIndex = 0;
 
 	AActor* TargetActor = nullptr;
 };

@@ -87,6 +87,26 @@ void AWizard::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
+AStaff* AWizard::GetStaff() const
+{
+	return Staff;
+}
+
+TArray<TSubclassOf<ASpellProjectileBase>> AWizard::GetAvailableSpells() const
+{
+	return AvailableSpells;
+}
+
+AActor* AWizard::GetTargetActor() const
+{
+	return TargetActor;
+}
+
+float AWizard::GetCurrentSpellIndex() const
+{
+	return CurrentSpellIndex;
+}
+
 
 void AWizard::Move(const FInputActionValue& Value)
 {
@@ -123,7 +143,6 @@ void AWizard::CastSpell(const FInputActionValue& Value)
 	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
 	if (Staff && AnimInstance && CastSpellMontage && !bIsCastingSpell)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("AnimeMontage Play"));
 		bIsCastingSpell = true;
 		AnimInstance->Montage_Play(CastSpellMontage);
 		FTimerHandle UnusedHandle;
@@ -141,16 +160,3 @@ void AWizard::ResetIsCastingSpell()
 	bIsCastingSpell = false;
 }
 
-void AWizard::SpawnSpellProjectile()
-{
-	
-}
-
-void AWizard::OnSpawnProjectile(FName NotifyName, const FBranchingPointNotifyPayload &Payload)
-{
-	UE_LOG(LogTemp, Warning, TEXT("OnSpawnProjectile"));
-	if (NotifyName == "SpawnSpellProjectile" && Staff)
-	{
-		Staff->CastSpell(AvailableSpells, 0, TargetActor);
-	}
-}
