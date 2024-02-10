@@ -118,6 +118,10 @@ void ASpellProjectileBase::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActo
 		{
 			UGameplayStatics::PlaySoundAtLocation(this, HitSound, GetActorLocation());
 		}
+
+		AController* MyOwnerInstigator = MyOwner->GetInstigatorController();
+		UClass* DamageType = UDamageType::StaticClass();
+		UGameplayStatics::ApplyDamage(OtherActor, Damage, MyOwnerInstigator, this, DamageType);
 	}
 
 	Destroy();

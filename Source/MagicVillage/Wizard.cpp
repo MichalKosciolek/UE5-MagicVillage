@@ -10,6 +10,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "SpellProjectileBase.h"
+#include "HealthComponent.h"
 
 // Sets default values
 AWizard::AWizard()
@@ -23,10 +24,14 @@ AWizard::AWizard()
 	SpringArm->TargetArmLength = 450.f;
 	SpringArm->bUsePawnControlRotation = true;
 
-	//Camera configuration
+	// Camera configuration
 	Camera = CreateDefaultSubobject<UCameraComponent>("Camera");
 	Camera->SetupAttachment(SpringArm, USpringArmComponent::SocketName);
 	Camera->bUsePawnControlRotation = false;
+
+	// Health Component configuration
+	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
+	HealthComponent->SetMaxHealth(100.f);
 
 	// Character Movement Component configuration
 	GetCharacterMovement()->bOrientRotationToMovement = true;
@@ -150,13 +155,13 @@ void AWizard::CastSpell(const FInputActionValue& Value)
 	}
 }
 
-bool AWizard::IsCastingSpell() const
-{
-	return bIsCastingSpell;
-}
-
 void AWizard::ResetIsCastingSpell()
 {
 	bIsCastingSpell = false;
+}
+
+void AWizard::HandleDeath()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Wizard died"));
 }
 

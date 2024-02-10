@@ -41,6 +41,8 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	class UInputAction* CastSpellAction;
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	class UHealthComponent* HealthComponent;
 
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
@@ -59,10 +61,8 @@ public:
 	AActor* GetTargetActor() const;
 	float GetCurrentSpellIndex() const;
 
-	UFUNCTION(BlueprintCallable, BlueprintPure)
-	bool IsCastingSpell() const;
-
 	void ResetIsCastingSpell();
+	void HandleDeath();
 
 private:
 

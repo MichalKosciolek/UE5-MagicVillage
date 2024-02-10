@@ -3,3 +3,12 @@
 
 #include "MagicVillageGameModeBase.h"
 
+void AMagicVillageGameModeBase::BeginPlay()
+{
+	Super::BeginPlay();
+
+}
+
+void AMagicVillageGameModeBase::ActorDied(AActor* DeadActor)
+{
+}

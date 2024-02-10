@@ -14,4 +14,9 @@ class MAGICVILLAGE_API AMagicVillageGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 	
+protected:
+	virtual void BeginPlay() override;
+
+public:
+	virtual void ActorDied(AActor* DeadActor);
 };

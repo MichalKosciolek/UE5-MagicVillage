@@ -29,13 +29,14 @@ protected:
 	bool bIsHoming = false;
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	float MaxReachedDistance = 5000.f;
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	float Damage = 20.f;
 	UPROPERTY(EditAnywhere, Category = "Speed")
 	float InitialSpeed = 500.f;
 	UPROPERTY(EditAnywhere, Category = "Speed")
 	float MaxSpeed = 500.f;
 	UPROPERTY(EditAnywhere, Category = "Speed")
 	float GravityScale = 0.f;
-
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	class UProjectileMovementComponent* ProjectileMovComp;
 	UPROPERTY(VisibleAnywhere, Category = "Components")
