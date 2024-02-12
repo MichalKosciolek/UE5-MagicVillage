@@ -38,18 +38,21 @@ void AStaff::CastSpell(TArray<TSubclassOf<ASpellProjectileBase>> AvailableSpells
 {
 	if (AvailableSpells.IsValidIndex(SpellIndex))
 	{
-		FActorSpawnParameters SpawnParams;
-		SpawnParams.Owner = this;
-		ASpellProjectileBase* Spell = GetWorld()->SpawnActor<ASpellProjectileBase>(
-			AvailableSpells[SpellIndex], 
-			ProjectileSpawnPoint->GetComponentLocation(), 
-			ProjectileSpawnPoint->GetComponentRotation(), 
-			SpawnParams
-			);
-			
-		if (TargetActor)
+		FTransform SpawnTransform = ProjectileSpawnPoint->GetComponentTransform();
+		ASpellProjectileBase* Spell = GetWorld()->SpawnActorDeferred<ASpellProjectileBase>(
+			AvailableSpells[SpellIndex],
+			SpawnTransform,
+			this
+		);
+
+		if (TargetActor && Spell)
 		{
 			Spell->SetTargetActor(TargetActor);
+		}
+
+		if (Spell)
+		{
+			Spell->FinishSpawning(SpawnTransform);
 		}
 	}
 }

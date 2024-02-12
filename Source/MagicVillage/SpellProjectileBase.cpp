@@ -27,7 +27,9 @@ ASpellProjectileBase::ASpellProjectileBase()
 	ProjectileMovComp = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovComp"));
 	ProjectileMovComp->InitialSpeed = InitialSpeed;
 	ProjectileMovComp->MaxSpeed = MaxSpeed;
-
+	ProjectileMovComp->bIsHomingProjectile = bIsHoming;
+	ProjectileMovComp->HomingAccelerationMagnitude = HomingAccelerationMagnitude;
+	ProjectileMovComp->ProjectileGravityScale = GravityScale;
 }
 
 // Called when the game starts or when spawned
@@ -39,17 +41,15 @@ void ASpellProjectileBase::BeginPlay()
 	
 	PlayerActor = Cast<AActor>(UGameplayStatics::GetPlayerCharacter(this, 0));
 
-	ProjectileMovComp->bIsHomingProjectile = bIsHoming;
-	ProjectileMovComp->ProjectileGravityScale = GravityScale;
-
 	if (TargetActor)
 	{
 		if (bIsHoming)
 		{
+			UE_LOG(LogTemp, Warning, TEXT("Setting target"));
 			ProjectileMovComp->HomingTargetComponent = TargetActor->GetRootComponent();
 		}
 
-		FVector TargetDicection = GetActorLocation() - TargetActor->GetActorLocation();
+		FVector TargetDicection = TargetActor->GetActorLocation() - GetActorLocation();
 		FVector TargetUnitDirection = TargetDicection.GetSafeNormal();
 		ProjectileMovComp->Velocity = TargetUnitDirection * InitialSpeed;
 	}

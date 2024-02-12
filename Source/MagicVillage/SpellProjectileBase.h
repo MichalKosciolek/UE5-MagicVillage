@@ -26,29 +26,41 @@ protected:
 	virtual void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
-	bool bIsHoming = false;
-	UPROPERTY(EditAnywhere, Category = "Combat")
 	float MaxReachedDistance = 5000.f;
+
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	float Damage = 20.f;
+
 	UPROPERTY(EditAnywhere, Category = "Speed")
 	float InitialSpeed = 500.f;
+
 	UPROPERTY(EditAnywhere, Category = "Speed")
 	float MaxSpeed = 500.f;
+
 	UPROPERTY(EditAnywhere, Category = "Speed")
 	float GravityScale = 0.f;
+
+	UPROPERTY(EditAnywhere, Category = "Speed")
+	float HomingAccelerationMagnitude = 100.0f;
+
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	class UProjectileMovementComponent* ProjectileMovComp;
+
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	class UBoxComponent* BoxComp;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Components")
 	class UStaticMeshComponent* SpellMesh;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Effects")
 	class UParticleSystem* ImpactEffect;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Effects")
 	class UParticleSystemComponent* TrailEffect;
+
 	UPROPERTY(EditAnywhere, Category = "Sounds")
 	class USoundBase* LaunchSound;
+
 	UPROPERTY(EditAnywhere, Category = "Sounds")
 	class USoundBase* HitSound;
 
@@ -56,6 +68,8 @@ protected:
 	class AActor* PlayerActor;
 
 	float CurrentDistanceFromPlayer = 0.f;
+
+	bool bIsHoming = false;
 
 public:	
 	// Called every frame

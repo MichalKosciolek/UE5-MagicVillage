@@ -28,7 +28,7 @@ public:
 
 private:
 	UPROPERTY(EditAnywhere)
-	float MaxHealth = 100.0f;
+	float MaxHealth = 20.0f;
 	float Health;
 
 	class AMagicBattleGameMode* MagicBattleGameMode;

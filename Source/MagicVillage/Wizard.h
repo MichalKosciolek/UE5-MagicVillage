@@ -41,12 +41,25 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	class UInputAction* CastSpellAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	class UInputAction* LockOnTargetAction;
+
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	class UHealthComponent* HealthComponent;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Targeting")
+	TArray<AActor*> TargetActorsCandidates;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Targeting")
+	float TargetFocusCameraOffset;
+
+	AActor* TargetActor = nullptr;
 
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
 	void CastSpell(const FInputActionValue& Value);
+	void LockOnTarget(const FInputActionValue& Value);
 
 public:	
 	// Called every frame
@@ -83,5 +96,5 @@ private:
 
 	float CurrentSpellIndex = 0;
 
-	AActor* TargetActor = nullptr;
+	bool bIsLockedOnTarget = false;
 };

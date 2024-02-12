@@ -6,7 +6,8 @@
 ASpellProjectileThunder::ASpellProjectileThunder()
     : Super()
 {
-    bIsHoming = false;
+    bIsHoming = true;
+    HomingAccelerationMagnitude = 1500.0f;
     InitialSpeed = 1000.f;
     MaxSpeed = 1000.f;
 }

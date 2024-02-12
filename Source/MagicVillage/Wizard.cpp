@@ -42,6 +42,9 @@ AWizard::AWizard()
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationRoll = false;
 
+	// Lock on target camera offset configuration
+	TargetFocusCameraOffset = 15.0f;
+
 }
 
 // Called when the game starts or when spawned
@@ -65,14 +68,19 @@ void AWizard::BeginPlay()
 		Staff->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("hand_r_Staff"));
 		Staff->SetOwner(this);
 	}
-
-	//GetMesh()->GetAnimInstance()->OnPlayMontageNotifyBegin.AddDynamic(this, &AWizard::OnSpawnProjectile);
 }
 
 // Called every frame
 void AWizard::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if (bIsLockedOnTarget)
+	{
+		FRotator LookAtRotation = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), TargetActor->GetActorLocation());
+		LookAtRotation.Pitch -= TargetFocusCameraOffset;
+		GetController()->SetControlRotation(LookAtRotation);
+	}
 
 }
 
@@ -88,6 +96,7 @@ void AWizard::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AWizard::Move);
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AWizard::Look);
 		EnhancedInputComponent->BindAction(CastSpellAction, ETriggerEvent::Started, this, &AWizard::CastSpell);
+		EnhancedInputComponent->BindAction(LockOnTargetAction, ETriggerEvent::Started, this, &AWizard::LockOnTarget);
 	}
 
 }
@@ -152,6 +161,23 @@ void AWizard::CastSpell(const FInputActionValue& Value)
 		AnimInstance->Montage_Play(CastSpellMontage);
 		FTimerHandle UnusedHandle;
 		GetWorldTimerManager().SetTimer(UnusedHandle, this, &AWizard::ResetIsCastingSpell, 1.0f, false);
+	}
+}
+
+void AWizard::LockOnTarget(const FInputActionValue& Value)
+{
+	if (bIsLockedOnTarget)
+	{
+		bIsLockedOnTarget = false;
+		TargetActor = nullptr;
+	}
+	else
+	{
+		if (TargetActorsCandidates.Num() > 0)
+		{
+			TargetActor = TargetActorsCandidates[0];
+			bIsLockedOnTarget = true;
+		}
 	}
 }
 
