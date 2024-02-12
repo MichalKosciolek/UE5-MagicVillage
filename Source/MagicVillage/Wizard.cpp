@@ -36,6 +36,7 @@ AWizard::AWizard()
 	// Character Movement Component configuration
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->RotationRate = FRotator(0.f, 450.f, 0.f);
+	GetCharacterMovement()->MaxWalkSpeed = MaxWalkSpeed;
 
 	// Controller Rotation configuration
 	bUseControllerRotationYaw = false;
@@ -80,6 +81,15 @@ void AWizard::Tick(float DeltaTime)
 		FRotator LookAtRotation = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), TargetActor->GetActorLocation());
 		LookAtRotation.Pitch -= TargetFocusCameraOffset;
 		GetController()->SetControlRotation(LookAtRotation);
+
+		FRotator CharacterRotation(0.f, LookAtRotation.Yaw, 0.f);
+		SetActorRotation(CharacterRotation);
+
+		GetCharacterMovement()->MaxWalkSpeed = MaxLockedOnSpeed;
+	}
+	else
+	{
+		GetCharacterMovement()->MaxWalkSpeed = MaxWalkSpeed;
 	}
 
 }
@@ -121,6 +131,10 @@ float AWizard::GetCurrentSpellIndex() const
 	return CurrentSpellIndex;
 }
 
+bool AWizard::GetIsLockedOnTarget() const
+{
+	return bIsLockedOnTarget;
+}
 
 void AWizard::Move(const FInputActionValue& Value)
 {

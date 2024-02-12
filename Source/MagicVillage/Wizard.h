@@ -21,14 +21,14 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
-	class UInputMappingContext* InputMapping;
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
 	class USpringArmComponent* SpringArm;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
 	class UCameraComponent* Camera;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
+	class UInputMappingContext* InputMapping;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	class UInputAction* JumpAction;
@@ -47,6 +47,12 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	class UHealthComponent* HealthComponent;
+	
+	UPROPERTY(EditAnywhere, Category = "Speed")
+	float MaxWalkSpeed = 600.0f;
+
+	UPROPERTY(EditAnywhere, Category = "Speed")
+	float MaxLockedOnSpeed = 400.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Targeting")
 	TArray<AActor*> TargetActorsCandidates;
@@ -73,6 +79,8 @@ public:
 	TArray<TSubclassOf<class ASpellProjectileBase>> GetAvailableSpells() const;
 	AActor* GetTargetActor() const;
 	float GetCurrentSpellIndex() const;
+	UFUNCTION(BlueprintPure)
+	bool GetIsLockedOnTarget() const;
 
 	void ResetIsCastingSpell();
 	void HandleDeath();
