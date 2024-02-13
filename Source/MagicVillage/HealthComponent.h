@@ -24,7 +24,12 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	// Setters
 	void SetMaxHealth(float NewMaxHealth);
+
+	// Getters
+	float GetMaxHealth() const;
+	float GetHealth() const;
 
 private:
 	UPROPERTY(EditAnywhere)

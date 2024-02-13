@@ -52,7 +52,7 @@ protected:
 	float MaxWalkSpeed = 600.0f;
 
 	UPROPERTY(EditAnywhere, Category = "Speed")
-	float MaxLockedOnSpeed = 400.0f;
+	float MaxLockedOnSpeed = 200.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Targeting")
 	TArray<AActor*> TargetActorsCandidates;
@@ -81,6 +81,8 @@ public:
 	float GetCurrentSpellIndex() const;
 	UFUNCTION(BlueprintPure)
 	bool GetIsLockedOnTarget() const;
+	UFUNCTION(BlueprintPure)
+	float GetHealthPercent() const;
 
 	void ResetIsCastingSpell();
 	void HandleDeath();

@@ -136,6 +136,11 @@ bool AWizard::GetIsLockedOnTarget() const
 	return bIsLockedOnTarget;
 }
 
+float AWizard::GetHealthPercent() const
+{
+	return HealthComponent->GetHealth() / HealthComponent->GetMaxHealth();
+}
+
 void AWizard::Move(const FInputActionValue& Value)
 {
 	FVector2D MovementVector = Value.Get<FVector2D>();

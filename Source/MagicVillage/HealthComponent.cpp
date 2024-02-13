@@ -42,13 +42,23 @@ void UHealthComponent::SetMaxHealth(float NewMaxHealth)
 	MaxHealth = NewMaxHealth;
 }
 
+float UHealthComponent::GetMaxHealth() const
+{
+	return MaxHealth;
+}
+
+float UHealthComponent::GetHealth() const
+{
+	return Health;
+}
+
 void UHealthComponent::TakeDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* Instigator, AActor* DamageCauser)
 {
-	UE_LOG(LogTemp, Warning, TEXT("TakenDamage"));
 	Health -= Damage;
 	if (Health <= 0)
 	{
 		MagicBattleGameMode->ActorDied(GetOwner());
 	}
+	UE_LOG(LogTemp, Warning, TEXT("Health: %f"), Health);
 }
 
