@@ -83,6 +83,7 @@ public:
 	// Getters
 	class AStaff* GetStaff() const;
 	TArray<TSubclassOf<class ASpellProjectileBase>> GetAvailableSpells() const;
+	UFUNCTION(BlueprintPure)
 	AActor* GetTargetActor() const;
 	float GetCurrentSpellIndex() const;
 	UFUNCTION(BlueprintPure)
