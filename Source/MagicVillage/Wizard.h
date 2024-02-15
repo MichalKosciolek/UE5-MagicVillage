@@ -60,6 +60,12 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Targeting")
 	float TargetFocusCameraOffset;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Targeting")
+	float LockOnTargetRotationSpeed;
+
+	UPROPERTY(EditAnywhere, Category = "Targeting")
+	float MaxLockOnDistance = 10000.0f;
+
 	AActor* TargetActor = nullptr;
 
 	void Move(const FInputActionValue& Value);
@@ -86,6 +92,7 @@ public:
 
 	void ResetIsCastingSpell();
 	void HandleDeath();
+	AActor* ChooseTargetActor(const TArray<AActor*>& Candidates);
 
 private:
 
@@ -107,4 +114,6 @@ private:
 	float CurrentSpellIndex = 0;
 
 	bool bIsLockedOnTarget = false;
+
+	bool FinalRotationAchieved = false;
 };

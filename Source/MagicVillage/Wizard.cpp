@@ -46,6 +46,9 @@ AWizard::AWizard()
 	// Lock on target camera offset configuration
 	TargetFocusCameraOffset = 15.0f;
 
+	// Lock on target camera rotation speed configuration
+	LockOnTargetRotationSpeed = 8.0f;
+
 }
 
 // Called when the game starts or when spawned
@@ -78,17 +81,36 @@ void AWizard::Tick(float DeltaTime)
 
 	if (bIsLockedOnTarget)
 	{
+		// Setting Controller Rotation to look at the target
 		FRotator LookAtRotation = UKismetMathLibrary::FindLookAtRotation(GetActorLocation(), TargetActor->GetActorLocation());
 		LookAtRotation.Pitch -= TargetFocusCameraOffset;
-		GetController()->SetControlRotation(LookAtRotation);
+		FRotator CurrentControllerRotation = GetControlRotation();
+		FRotator NewControllerRotation = CurrentControllerRotation;
 
+		if (FMath::Abs(NewControllerRotation.Yaw - LookAtRotation.Yaw) > 1.0f && !FinalRotationAchieved)
+		{
+			NewControllerRotation = FMath::RInterpTo(CurrentControllerRotation, LookAtRotation, DeltaTime, LockOnTargetRotationSpeed);
+			GetController()->SetControlRotation(NewControllerRotation);
+		}
+		else
+		{
+			FinalRotationAchieved = true;
+			GetController()->SetControlRotation(LookAtRotation);
+		}
+
+		// Setting Character Rotation to look at the target
 		FRotator CharacterRotation(0.f, LookAtRotation.Yaw, 0.f);
-		SetActorRotation(CharacterRotation);
+		FRotator ActorYawRotation(0.f, GetActorRotation().Yaw, 0.f);
+		FRotator NewCharacterRotation = FMath::RInterpTo(ActorYawRotation, CharacterRotation, DeltaTime, LockOnTargetRotationSpeed);
+		SetActorRotation(NewCharacterRotation);
+
+		GetCharacterMovement()->bOrientRotationToMovement = false;
 
 		GetCharacterMovement()->MaxWalkSpeed = MaxLockedOnSpeed;
 	}
 	else
 	{
+		GetCharacterMovement()->bOrientRotationToMovement = true;
 		GetCharacterMovement()->MaxWalkSpeed = MaxWalkSpeed;
 	}
 
@@ -195,7 +217,10 @@ void AWizard::LockOnTarget(const FInputActionValue& Value)
 		if (TargetActorsCandidates.Num() > 0)
 		{
 			TargetActor = TargetActorsCandidates[0];
+			UE_LOG(LogTemp, Warning, TEXT("Candidates in array: %d"), TargetActorsCandidates.Num());
+			UE_LOG(LogTemp, Warning, TEXT("TargetActor: %s"), *TargetActor->GetName());
 			bIsLockedOnTarget = true;
+			FinalRotationAchieved = false;
 		}
 	}
 }
@@ -208,5 +233,26 @@ void AWizard::ResetIsCastingSpell()
 void AWizard::HandleDeath()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Wizard died"));
+}
+
+AActor* AWizard::ChooseTargetActor(const TArray<AActor*>& Candidates)
+{
+	FVector WizardLocation = GetActorLocation();
+	float MinDistance = 100000.f;
+	AActor* ChosenTarget = nullptr;
+	for (AActor* Candidate : Candidates)
+	{
+		if (Candidate)
+		{
+			FVector CandidateLocation = Candidate->GetActorLocation();
+			float DistanceToCandidate = FVector::Dist(WizardLocation, CandidateLocation);
+			if (DistanceToCandidate < MinDistance)
+			{
+				MinDistance = DistanceToCandidate;
+				ChosenTarget = Candidate;
+			}
+		}
+	}
+	return ChosenTarget;
 }
 
