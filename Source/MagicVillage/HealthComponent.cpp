@@ -52,12 +52,19 @@ float UHealthComponent::GetHealth() const
 	return Health;
 }
 
+bool UHealthComponent::GetIsDead() const
+{
+	return bIsDead;
+}
+
 void UHealthComponent::TakeDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* Instigator, AActor* DamageCauser)
 {
 	Health -= Damage;
 	if (Health <= 0)
 	{
-		MagicBattleGameMode->ActorDied(GetOwner());
+		bIsDead = true;
+		APawn* DeadPawn = Cast<APawn>(GetOwner());
+		MagicBattleGameMode->PawnDied(DeadPawn);
 	}
 	UE_LOG(LogTemp, Warning, TEXT("Health: %f"), Health);
 }

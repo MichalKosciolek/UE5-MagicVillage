@@ -90,6 +90,8 @@ public:
 	bool GetIsLockedOnTarget() const;
 	UFUNCTION(BlueprintPure)
 	float GetHealthPercent() const;
+	UFUNCTION(BlueprintPure)
+	class UHealthComponent* GetHealthComponent() const;
 
 	void ResetIsCastingSpell();
 	void HandleDeath();
@@ -117,4 +119,5 @@ private:
 	bool bIsLockedOnTarget = false;
 
 	bool FinalRotationAchieved = false;
+
 };

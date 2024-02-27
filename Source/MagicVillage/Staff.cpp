@@ -38,7 +38,6 @@ void AStaff::CastSpell(TArray<TSubclassOf<ASpellProjectileBase>> AvailableSpells
 {
 	if (AvailableSpells.IsValidIndex(SpellIndex))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Spawning spell"));
 		FTransform SpawnTransform = ProjectileSpawnPoint->GetComponentTransform();
 		ASpellProjectileBase* Spell = GetWorld()->SpawnActorDeferred<ASpellProjectileBase>(
 			AvailableSpells[SpellIndex],
@@ -46,7 +45,6 @@ void AStaff::CastSpell(TArray<TSubclassOf<ASpellProjectileBase>> AvailableSpells
 			this
 		);
 
-		UE_LOG(LogTemp, Warning, TEXT("Is TargetActor Valid (in staff): %s"), TargetActor ? TEXT("true") : TEXT("false"));
 		if (TargetActor && Spell)
 		{
 			Spell->SetTargetActor(TargetActor);

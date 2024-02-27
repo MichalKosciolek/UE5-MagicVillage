@@ -163,6 +163,11 @@ float AWizard::GetHealthPercent() const
 	return HealthComponent->GetHealth() / HealthComponent->GetMaxHealth();
 }
 
+UHealthComponent* AWizard::GetHealthComponent() const
+{
+	return HealthComponent;
+}
+
 void AWizard::Move(const FInputActionValue& Value)
 {
 	FVector2D MovementVector = Value.Get<FVector2D>();
@@ -216,10 +221,7 @@ void AWizard::LockOnTarget(const FInputActionValue& Value)
 	{
 		if (TargetActorsCandidates.Num() > 0)
 		{
-			//TargetActor = TargetActorsCandidates[0];
 			TargetActor = ChooseTargetActor(TargetActorsCandidates);
-			UE_LOG(LogTemp, Warning, TEXT("Candidates in array: %d"), TargetActorsCandidates.Num());
-			UE_LOG(LogTemp, Warning, TEXT("TargetActor: %s"), *TargetActor->GetName());
 			bIsLockedOnTarget = true;
 			FinalRotationAchieved = false;
 		}

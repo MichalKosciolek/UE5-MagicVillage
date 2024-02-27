@@ -45,7 +45,6 @@ void ASpellProjectileBase::BeginPlay()
 	{
 		if (bIsHoming)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Setting target"));
 			ProjectileMovComp->HomingTargetComponent = TargetActor->GetRootComponent();
 		}
 

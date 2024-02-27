@@ -2,9 +2,39 @@
 
 
 #include "MagicBattleGameMode.h"
+#include "EngineUtils.h"
+#include "WizardAIController.h"
 
-void AMagicBattleGameMode::ActorDied(AActor* DeadActor)
+void AMagicBattleGameMode::PawnDied(APawn* DeadPawn)
 {
-	Super::ActorDied(DeadActor);
-	UE_LOG(LogTemp, Warning, TEXT("Wizard died"));
+	Super::PawnDied(DeadPawn);
+	APlayerController* PlayerController = Cast<APlayerController>(DeadPawn->GetController());
+	if (PlayerController)
+	{
+		EndGame(false);
+	}
+
+	for (AWizardAIController* AIController : TActorRange<AWizardAIController>(GetWorld()))
+	{
+		if (!AIController->IsDead())
+		{
+			return;
+		}
+	}
+
+	EndGame(true);
+
+}
+
+void AMagicBattleGameMode::EndGame(bool bIsPlayerWinner)
+{
+	if (bIsPlayerWinner)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Player won"));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Player lost"));
+	}
+
 }

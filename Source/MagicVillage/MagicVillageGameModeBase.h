@@ -18,5 +18,5 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	virtual void ActorDied(AActor* DeadActor);
+	virtual void PawnDied(APawn* DeadPawn);
 };

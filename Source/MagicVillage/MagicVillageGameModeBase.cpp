@@ -9,6 +9,6 @@ void AMagicVillageGameModeBase::BeginPlay()
 
 }
 
-void AMagicVillageGameModeBase::ActorDied(AActor* DeadActor)
+void AMagicVillageGameModeBase::PawnDied(APawn* DeadPawn)
 {
 }

@@ -30,11 +30,14 @@ public:
 	// Getters
 	float GetMaxHealth() const;
 	float GetHealth() const;
+	UFUNCTION(BlueprintPure)
+	bool GetIsDead() const;
 
 private:
 	UPROPERTY(EditAnywhere)
 	float MaxHealth = 20.0f;
 	float Health;
+	bool bIsDead = false;
 
 	class AMagicBattleGameMode* MagicBattleGameMode;
 

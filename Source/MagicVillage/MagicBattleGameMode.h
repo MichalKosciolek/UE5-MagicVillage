@@ -15,5 +15,8 @@ class MAGICVILLAGE_API AMagicBattleGameMode : public AMagicVillageGameModeBase
 	GENERATED_BODY()
 	
 public:
-	virtual void ActorDied(AActor* DeadActor) override;
+	virtual void PawnDied(APawn* DeadPawn) override;
+
+private:
+	void EndGame(bool bIsPlayerWinner);
 };
