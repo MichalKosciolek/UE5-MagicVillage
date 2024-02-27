@@ -13,5 +13,12 @@ UCLASS()
 class MAGICVILLAGE_API AWizardPlayerController : public APlayerController
 {
 	GENERATED_BODY()
+
+protected:
+	virtual void BeginPlay() override;
+
+private:
+	UPROPERTY(EditAnywhere, Category = "Widgets")
+	TSubclassOf<class UUserWidget> HUDClass;
 	
 };

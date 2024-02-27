@@ -2,4 +2,15 @@
 
 
 #include "WizardPlayerController.h"
+#include "Blueprint/UserWidget.h"
 
+void AWizardPlayerController::BeginPlay()
+{
+	Super::BeginPlay();
+
+	UUserWidget* HUD = CreateWidget(this, HUDClass);
+	if (HUD)
+	{
+		HUD->AddToViewport();
+	}
+}
