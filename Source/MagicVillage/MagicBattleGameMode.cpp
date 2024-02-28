@@ -4,10 +4,12 @@
 #include "MagicBattleGameMode.h"
 #include "EngineUtils.h"
 #include "WizardAIController.h"
+#include "Wizard.h"
 
 void AMagicBattleGameMode::PawnDied(APawn* DeadPawn)
 {
 	Super::PawnDied(DeadPawn);
+
 	APlayerController* PlayerController = Cast<APlayerController>(DeadPawn->GetController());
 	if (PlayerController)
 	{

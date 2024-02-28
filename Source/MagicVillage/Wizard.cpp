@@ -86,7 +86,6 @@ void AWizard::BeginPlay()
 void AWizard::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 	if (bIsLockedOnTarget)
 	{
 		// Setting Controller Rotation to look at the target
@@ -193,6 +192,11 @@ int AWizard::GetManaPotions() const
 	return ManaPotions;
 }
 
+void AWizard::SetIsLockedOnTarget(bool NewIsLockedOnTarget)
+{
+	bIsLockedOnTarget = NewIsLockedOnTarget;
+}
+
 void AWizard::Move(const FInputActionValue& Value)
 {
 	FVector2D MovementVector = Value.Get<FVector2D>();
@@ -268,7 +272,11 @@ void AWizard::ResetIsDrinkingPotion()
 
 void AWizard::HandleDeath()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Wizard died"));
+	if (Staff)
+	{
+		Staff->Destroy();
+	}
+	Destroy();
 }
 
 void AWizard::PlayDrinkingPotionMontage()

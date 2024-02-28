@@ -4,6 +4,7 @@
 #include "HealthComponent.h"
 #include "MagicBattleGameMode.h"
 #include "Kismet/GameplayStatics.h"
+#include "Wizard.h"
 
 // Sets default values for this component's properties
 UHealthComponent::UHealthComponent()
@@ -70,8 +71,19 @@ void UHealthComponent::TakeDamage(AActor* DamagedActor, float Damage, const clas
 	{
 		bIsDead = true;
 		APawn* DeadPawn = Cast<APawn>(GetOwner());
+		AWizard* DeadWizard = Cast<AWizard>(GetOwner());
 		MagicBattleGameMode->PawnDied(DeadPawn);
+		FTimerHandle TimerHandle;
+		if (DeadWizard)
+		{
+			GetOwner()->GetWorldTimerManager().SetTimer(TimerHandle, DeadWizard, &AWizard::HandleDeath, 1.0f, false);
+		}
+		
+		AWizard* CauserWizard = Cast<AWizard>(DamageCauser->GetOwner()->GetOwner());
+		if (CauserWizard)
+		{
+			CauserWizard->SetIsLockedOnTarget(false);
+		}
 	}
-	UE_LOG(LogTemp, Warning, TEXT("Health: %f"), Health);
 }
 

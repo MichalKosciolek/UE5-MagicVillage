@@ -95,7 +95,6 @@ public:
 	class AStaff* GetStaff() const;
 	TArray<TSubclassOf<class ASpellProjectileBase>> GetAvailableSpells() const;
 
-	// Getters
 	UFUNCTION(BlueprintPure)
 	AActor* GetTargetActor() const;
 
@@ -118,6 +117,9 @@ public:
 
 	UFUNCTION(BlueprintPure)
 	int GetManaPotions() const;
+
+	// Setters
+	void SetIsLockedOnTarget(bool NewIsLockedOnTarget);
 
 	void ResetIsCastingSpell();
 	void ResetIsDrinkingPotion();
