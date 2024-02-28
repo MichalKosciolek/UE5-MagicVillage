@@ -33,6 +33,8 @@ public:
 	UFUNCTION(BlueprintPure)
 	bool GetIsDead() const;
 
+	void Heal(float HealAmount);
+
 private:
 	UPROPERTY(EditAnywhere)
 	float MaxHealth = 20.0f;

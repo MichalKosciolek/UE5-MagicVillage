@@ -98,6 +98,11 @@ float ASpellProjectileBase::CalculateDistanceFromPlayer()
 	}
 }
 
+float ASpellProjectileBase::GetManaCost() const
+{
+	return ManaCost;
+}
+
 void ASpellProjectileBase::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 	AActor* MyOwner = GetOwner();

@@ -10,6 +10,7 @@ ASpellProjectileThunder::ASpellProjectileThunder()
     HomingAccelerationMagnitude = 1500.0f;
     InitialSpeed = 1000.f;
     MaxSpeed = 1000.f;
+    ManaCost = 10.f;
 }
 
 void ASpellProjectileThunder::BeginPlay()

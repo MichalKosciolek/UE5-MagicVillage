@@ -57,6 +57,12 @@ bool UHealthComponent::GetIsDead() const
 	return bIsDead;
 }
 
+void UHealthComponent::Heal(float HealAmount)
+{
+	Health += HealAmount;
+	Health = FMath::Clamp(Health, 0.0f, MaxHealth);
+}
+
 void UHealthComponent::TakeDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* Instigator, AActor* DamageCauser)
 {
 	Health -= Damage;

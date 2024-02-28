@@ -45,6 +45,15 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	class UInputAction* LockOnTargetAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	class UInputAction* DrinkHealthPotionAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
+	class UInputAction* DrinkManaPotionAction;
+
+	UPROPERTY(EditAnywhere, Category = "Sounds")
+	class USoundBase* DrinkingPotionSound;
+
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	class UHealthComponent* HealthComponent;
 	
@@ -72,6 +81,8 @@ protected:
 	void Look(const FInputActionValue& Value);
 	void CastSpell(const FInputActionValue& Value);
 	void LockOnTarget(const FInputActionValue& Value);
+	void DrinkHealthPotion(const FInputActionValue& Value);
+	void DrinkManaPotion(const FInputActionValue& Value);
 
 public:	
 	// Called every frame
@@ -85,16 +96,25 @@ public:
 	TArray<TSubclassOf<class ASpellProjectileBase>> GetAvailableSpells() const;
 	UFUNCTION(BlueprintPure)
 	AActor* GetTargetActor() const;
+
 	float GetCurrentSpellIndex() const;
+
 	UFUNCTION(BlueprintPure)
 	bool GetIsLockedOnTarget() const;
+
 	UFUNCTION(BlueprintPure)
 	float GetHealthPercent() const;
+
 	UFUNCTION(BlueprintPure)
 	class UHealthComponent* GetHealthComponent() const;
 
+	UFUNCTION(BlueprintPure)
+	float GetManaPercent() const;
+
 	void ResetIsCastingSpell();
+	void ResetIsDrinkingPotion();
 	void HandleDeath();
+	void PlayDrinkingPotionMontage();
 	AActor* ChooseTargetActor(const TArray<AActor*>& Candidates);
 
 private:
@@ -111,8 +131,34 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Animation");
 	class UAnimMontage* CastSpellMontage;
 
+	UPROPERTY(EditAnywhere, Category = "Animation");
+	class UAnimMontage* DrinkingPotionMontage;
+
 	UPROPERTY(EditAnywhere)
 	bool bIsCastingSpell = false;
+
+	bool bIsDrinkingPotion = false;
+
+	UPROPERTY(EditAnywhere, Category = "Potions")
+	float MaxMana = 100.0f;
+
+	float Mana;
+
+	UPROPERTY(EditAnywhere, Category = "Potions")
+	int MaxHealthPotions = 3;
+
+	UPROPERTY(EditAnywhere, Category = "Potions")
+	float HealthPotionAmount = 30.0f;
+
+	int HealthPotions;
+
+	UPROPERTY(EditAnywhere, Category = "Potions")
+	int MaxManaPotions = 3;
+
+	UPROPERTY(EditAnywhere, Category = "Potions")
+	float ManaPotionAmount = 30.0f;
+
+	int ManaPotions;
 
 	float CurrentSpellIndex = 0;
 

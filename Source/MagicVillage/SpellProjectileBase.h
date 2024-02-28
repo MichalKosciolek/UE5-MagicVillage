@@ -18,6 +18,9 @@ public:
 	void SetTargetActor(AActor* Target);
 	float CalculateDistanceFromPlayer();
 
+	// Getters
+	float GetManaCost() const;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -30,6 +33,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	float Damage = 20.f;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	float ManaCost = 20.f;
 
 	UPROPERTY(EditAnywhere, Category = "Speed")
 	float InitialSpeed = 500.f;

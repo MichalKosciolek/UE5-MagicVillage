@@ -9,6 +9,7 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Kismet/GameplayStatics.h"
 #include "SpellProjectileBase.h"
 #include "HealthComponent.h"
 
@@ -56,6 +57,13 @@ void AWizard::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	// Setting mana
+	Mana = MaxMana;
+
+	// Setting potions
+	HealthPotions = MaxHealthPotions;
+	ManaPotions = MaxManaPotions;
+
 	//Add Input Mapping Context
 	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
 	{
@@ -129,6 +137,8 @@ void AWizard::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AWizard::Look);
 		EnhancedInputComponent->BindAction(CastSpellAction, ETriggerEvent::Started, this, &AWizard::CastSpell);
 		EnhancedInputComponent->BindAction(LockOnTargetAction, ETriggerEvent::Started, this, &AWizard::LockOnTarget);
+		EnhancedInputComponent->BindAction(DrinkHealthPotionAction, ETriggerEvent::Started, this, &AWizard::DrinkHealthPotion);
+		EnhancedInputComponent->BindAction(DrinkManaPotionAction, ETriggerEvent::Started, this, &AWizard::DrinkManaPotion);
 	}
 
 }
@@ -168,6 +178,11 @@ UHealthComponent* AWizard::GetHealthComponent() const
 	return HealthComponent;
 }
 
+float AWizard::GetManaPercent() const
+{
+	return Mana / MaxMana;
+}
+
 void AWizard::Move(const FInputActionValue& Value)
 {
 	FVector2D MovementVector = Value.Get<FVector2D>();
@@ -200,13 +215,16 @@ void AWizard::Look(const FInputActionValue& Value)
 
 void AWizard::CastSpell(const FInputActionValue& Value)
 {
+	float CurrentManaCost = AvailableSpells[CurrentSpellIndex].GetDefaultObject()->GetManaCost();
+
 	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
-	if (Staff && AnimInstance && CastSpellMontage && !bIsCastingSpell)
+	if (Staff && AnimInstance && CastSpellMontage && !bIsCastingSpell && !bIsDrinkingPotion && Mana >= CurrentManaCost)
 	{
 		bIsCastingSpell = true;
+		Mana -= CurrentManaCost;
 		AnimInstance->Montage_Play(CastSpellMontage);
-		FTimerHandle UnusedHandle;
-		GetWorldTimerManager().SetTimer(UnusedHandle, this, &AWizard::ResetIsCastingSpell, 1.0f, false);
+		FTimerHandle TimerHandle;
+		GetWorldTimerManager().SetTimer(TimerHandle, this, &AWizard::ResetIsCastingSpell, 1.0f, false);
 	}
 }
 
@@ -233,9 +251,47 @@ void AWizard::ResetIsCastingSpell()
 	bIsCastingSpell = false;
 }
 
+void AWizard::ResetIsDrinkingPotion()
+{
+	bIsDrinkingPotion = false;
+}
+
 void AWizard::HandleDeath()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Wizard died"));
+}
+
+void AWizard::PlayDrinkingPotionMontage()
+{
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	if (AnimInstance && DrinkingPotionMontage && DrinkingPotionSound)
+	{
+		AnimInstance->Montage_Play(DrinkingPotionMontage);
+		UGameplayStatics::PlaySoundAtLocation(this, DrinkingPotionSound, GetActorLocation());		
+		FTimerHandle TimerHandle;
+		GetWorldTimerManager().SetTimer(TimerHandle, this, &AWizard::ResetIsDrinkingPotion, 1.0f, false);
+	}
+}
+
+void AWizard::DrinkHealthPotion(const FInputActionValue& Value)
+{
+	if (HealthPotions > 0 && !bIsCastingSpell)
+	{
+		PlayDrinkingPotionMontage();
+		HealthComponent->Heal(HealthPotionAmount);
+		HealthPotions--;
+	}
+}
+
+void AWizard::DrinkManaPotion(const FInputActionValue& Value)
+{
+	if (ManaPotions > 0 && !bIsCastingSpell)
+	{
+		PlayDrinkingPotionMontage();
+		Mana += ManaPotionAmount;
+		Mana = FMath::Clamp(Mana, 0.0f, MaxMana);
+		ManaPotions--;
+	}
 }
 
 AActor* AWizard::ChooseTargetActor(const TArray<AActor*>& Candidates)
