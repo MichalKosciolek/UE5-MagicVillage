@@ -183,6 +183,16 @@ float AWizard::GetManaPercent() const
 	return Mana / MaxMana;
 }
 
+int AWizard::GetHealthPotions() const
+{
+	return HealthPotions;
+}
+
+int AWizard::GetManaPotions() const
+{
+	return ManaPotions;
+}
+
 void AWizard::Move(const FInputActionValue& Value)
 {
 	FVector2D MovementVector = Value.Get<FVector2D>();

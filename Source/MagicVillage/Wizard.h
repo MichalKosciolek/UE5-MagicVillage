@@ -94,6 +94,8 @@ public:
 	// Getters
 	class AStaff* GetStaff() const;
 	TArray<TSubclassOf<class ASpellProjectileBase>> GetAvailableSpells() const;
+
+	// Getters
 	UFUNCTION(BlueprintPure)
 	AActor* GetTargetActor() const;
 
@@ -110,6 +112,12 @@ public:
 
 	UFUNCTION(BlueprintPure)
 	float GetManaPercent() const;
+
+	UFUNCTION(BlueprintPure)
+	int GetHealthPotions() const;
+
+	UFUNCTION(BlueprintPure)
+	int GetManaPotions() const;
 
 	void ResetIsCastingSpell();
 	void ResetIsDrinkingPotion();
