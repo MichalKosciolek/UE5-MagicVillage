@@ -4,6 +4,20 @@
 #include "WizardAIController.h"
 #include "Wizard.h"
 #include "HealthComponent.h"
+#include "BehaviorTree/BlackboardComponent.h"
+
+void AWizardAIController::BeginPlay()
+{
+	Super::BeginPlay();
+
+	if (BehaviorTree)
+	{
+		RunBehaviorTree(BehaviorTree);
+		GetBlackboardComponent()->SetValueAsVector(TEXT("StartLocation"), GetPawn()->GetActorLocation());
+	}
+
+
+}
 
 bool AWizardAIController::IsDead() const
 {

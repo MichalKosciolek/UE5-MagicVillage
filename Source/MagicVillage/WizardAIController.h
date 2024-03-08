@@ -14,6 +14,12 @@ class MAGICVILLAGE_API AWizardAIController : public AAIController
 {
 	GENERATED_BODY()
 	
+protected:
+	virtual void BeginPlay() override;
+
 public:
 	bool IsDead() const;
+
+	UPROPERTY(EditAnywhere)
+	UBehaviorTree* BehaviorTree;
 };
