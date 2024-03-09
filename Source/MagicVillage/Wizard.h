@@ -122,12 +122,17 @@ public:
 	// Setters
 	void SetIsLockedOnTarget(bool NewIsLockedOnTarget);
 
+	void SetTargetActor(AActor* NewTargetActor);
+
 	void ResetIsCastingSpell();
 	void ResetIsDrinkingPotion();
 	void HandleDeath();
 	void PlayDrinkingPotionMontage();
+	void AddManaPotion();
+	void AddHealthPotion();
 	AActor* ChooseTargetActor(const TArray<AActor*>& Candidates);
-	void SetTargetActor(AActor* NewTargetActor);
+
+
 
 private:
 
@@ -157,15 +162,9 @@ private:
 	float Mana;
 
 	UPROPERTY(EditAnywhere, Category = "Potions")
-	int MaxHealthPotions = 3;
-
-	UPROPERTY(EditAnywhere, Category = "Potions")
 	float HealthPotionAmount = 30.0f;
 
 	int HealthPotions;
-
-	UPROPERTY(EditAnywhere, Category = "Potions")
-	int MaxManaPotions = 3;
 
 	UPROPERTY(EditAnywhere, Category = "Potions")
 	float ManaPotionAmount = 30.0f;

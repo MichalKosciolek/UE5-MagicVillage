@@ -61,8 +61,8 @@ void AWizard::BeginPlay()
 	Mana = MaxMana;
 
 	// Setting potions
-	HealthPotions = MaxHealthPotions;
-	ManaPotions = MaxManaPotions;
+	HealthPotions = 3;
+	ManaPotions = 3;
 
 	//Add Input Mapping Context
 	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
@@ -316,6 +316,16 @@ void AWizard::DrinkManaPotion(const FInputActionValue& Value)
 		Mana = FMath::Clamp(Mana, 0.0f, MaxMana);
 		ManaPotions--;
 	}
+}
+
+void AWizard::AddManaPotion()
+{
+	ManaPotions++;
+}
+
+void AWizard::AddHealthPotion()
+{
+	HealthPotions++;
 }
 
 AActor* AWizard::ChooseTargetActor(const TArray<AActor*>& Candidates)
