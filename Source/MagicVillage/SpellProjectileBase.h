@@ -37,6 +37,11 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	float ManaCost = 20.f;
 
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	float MaxLifeTime = 3.0f;
+
+	float TimeSinceSpawned = 0.0f;
+
 	UPROPERTY(EditAnywhere, Category = "Speed")
 	float InitialSpeed = 500.f;
 

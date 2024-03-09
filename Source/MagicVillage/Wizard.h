@@ -79,7 +79,6 @@ protected:
 
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
-	void CastSpell(const FInputActionValue& Value);
 	void LockOnTarget(const FInputActionValue& Value);
 	void DrinkHealthPotion(const FInputActionValue& Value);
 	void DrinkManaPotion(const FInputActionValue& Value);
@@ -90,6 +89,8 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	void CastSpell(const FInputActionValue& Value);
 
 	// Getters
 	class AStaff* GetStaff() const;
@@ -126,6 +127,7 @@ public:
 	void HandleDeath();
 	void PlayDrinkingPotionMontage();
 	AActor* ChooseTargetActor(const TArray<AActor*>& Candidates);
+	void SetTargetActor(AActor* NewTargetActor);
 
 private:
 

@@ -74,6 +74,12 @@ void ASpellProjectileBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	TimeSinceSpawned += DeltaTime;
+	if (TimeSinceSpawned > MaxLifeTime)
+	{
+		Destroy();
+	}
+
 	CurrentDistanceFromPlayer = CalculateDistanceFromPlayer();
 	if (CurrentDistanceFromPlayer > MaxReachedDistance)
 	{
@@ -106,7 +112,7 @@ float ASpellProjectileBase::GetManaCost() const
 void ASpellProjectileBase::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 	AActor* MyOwner = GetOwner();
-	if (MyOwner && OtherActor && OtherActor != this && OtherActor != MyOwner && OtherActor != PlayerActor)
+	if (MyOwner && OtherActor && OtherActor != this && OtherActor != MyOwner)
 	{
 		if (ImpactEffect)
 		{

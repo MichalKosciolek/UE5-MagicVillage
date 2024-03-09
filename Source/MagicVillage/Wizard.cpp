@@ -216,6 +216,12 @@ void AWizard::Move(const FInputActionValue& Value)
 
 }
 
+
+void AWizard::SetTargetActor(AActor* NewTargetActor)
+{
+	TargetActor = NewTargetActor;
+}
+
 void AWizard::Look(const FInputActionValue& Value)
 {
 	FVector2D LookVector = Value.Get<FVector2D>();
