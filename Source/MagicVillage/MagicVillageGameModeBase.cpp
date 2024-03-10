@@ -2,11 +2,11 @@
 
 
 #include "MagicVillageGameModeBase.h"
+#include "Blueprint/UserWidget.h"
 
 void AMagicVillageGameModeBase::BeginPlay()
 {
 	Super::BeginPlay();
-
 }
 
 void AMagicVillageGameModeBase::PawnDied(APawn* DeadPawn)

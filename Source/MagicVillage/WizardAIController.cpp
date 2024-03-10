@@ -6,6 +6,8 @@
 #include "HealthComponent.h"
 #include "BehaviorTree/BlackboardComponent.h"
 
+#include "Kismet/GameplayStatics.h"
+
 void AWizardAIController::BeginPlay()
 {
 	Super::BeginPlay();
@@ -17,6 +19,11 @@ void AWizardAIController::BeginPlay()
 	}
 
 
+}
+
+void AWizardAIController::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
 }
 
 bool AWizardAIController::IsDead() const

@@ -12,6 +12,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "SpellProjectileBase.h"
 #include "HealthComponent.h"
+#include "Components/CapsuleComponent.h"
 
 // Sets default values
 AWizard::AWizard()
@@ -120,7 +121,6 @@ void AWizard::Tick(float DeltaTime)
 		GetCharacterMovement()->bOrientRotationToMovement = true;
 		GetCharacterMovement()->MaxWalkSpeed = MaxWalkSpeed;
 	}
-
 }
 
 // Called to bind functionality to input
@@ -282,7 +282,9 @@ void AWizard::HandleDeath()
 	{
 		Staff->Destroy();
 	}
-	Destroy();
+
+	DetachFromControllerPendingDestroy();
+	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
 void AWizard::PlayDrinkingPotionMontage()

@@ -26,9 +26,11 @@ void UBTService_PlayerLocationIfSeen::TickNode(UBehaviorTreeComponent& OwnerComp
 	if (AIController->LineOfSightTo(PlayerPawn))
 	{
 		OwnerComp.GetBlackboardComponent()->SetValueAsVector(GetSelectedBlackboardKey(), PlayerPawn->GetActorLocation());
+		//AIController->SetFocus(PlayerPawn, EAIFocusPriority::Gameplay);
 	}
 	else
 	{
 		OwnerComp.GetBlackboardComponent()->ClearValue(GetSelectedBlackboardKey());
+		//AIController->ClearFocus(EAIFocusPriority::Gameplay);
 	}
 }
