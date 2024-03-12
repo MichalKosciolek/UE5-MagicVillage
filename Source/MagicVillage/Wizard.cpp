@@ -87,6 +87,7 @@ void AWizard::BeginPlay()
 void AWizard::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
 	if (bIsLockedOnTarget)
 	{
 		// Setting Controller Rotation to look at the target
@@ -203,10 +204,10 @@ void AWizard::Move(const FInputActionValue& Value)
 
 	if (Controller)
 	{
+		// Calculate movement directions
 		FRotator ControllerRotation = Controller->GetControlRotation();
 		FRotator Yawrotaion(0.f, ControllerRotation.Yaw, 0.f);
 
-		// Calculate movement directions
 		FVector ForwardDirection = UKismetMathLibrary::GetForwardVector(ControllerRotation);
 		FVector RightDirection = UKismetMathLibrary::GetRightVector(ControllerRotation);
 

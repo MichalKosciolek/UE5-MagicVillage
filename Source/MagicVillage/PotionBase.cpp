@@ -24,6 +24,7 @@ void APotionBase::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	// Setting delegate
 	OnActorBeginOverlap.AddDynamic(this, &APotionBase::OnOverlap);
 }
 

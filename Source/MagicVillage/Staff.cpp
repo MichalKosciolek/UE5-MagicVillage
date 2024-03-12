@@ -11,12 +11,15 @@ AStaff::AStaff()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	// Setting Root
 	Root = CreateDefaultSubobject<USceneComponent>("Root");
 	SetRootComponent(Root);
 
+	// Setting Mesh
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
 	Mesh->SetupAttachment(Root);
 
+	// Setting ProjectileSpawnPoint
 	ProjectileSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("ProjectileSpawnPoint"));
 	ProjectileSpawnPoint->SetupAttachment(Mesh);
 }
@@ -25,6 +28,7 @@ AStaff::AStaff()
 void AStaff::BeginPlay()
 {
 	Super::BeginPlay();
+
 }
 
 // Called every frame
@@ -38,6 +42,7 @@ void AStaff::CastSpell(TArray<TSubclassOf<ASpellProjectileBase>> AvailableSpells
 {
 	if (AvailableSpells.IsValidIndex(SpellIndex))
 	{
+		// Spawning Spell
 		FTransform SpawnTransform = ProjectileSpawnPoint->GetComponentTransform();
 		ASpellProjectileBase* Spell = GetWorld()->SpawnActorDeferred<ASpellProjectileBase>(
 			AvailableSpells[SpellIndex],

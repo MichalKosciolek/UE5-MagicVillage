@@ -10,12 +10,14 @@ void AMagicBattleGameMode::PawnDied(APawn* DeadPawn)
 {
 	Super::PawnDied(DeadPawn);
 
+	// Checking if DeadPawn is Player
 	APlayerController* PlayerController = Cast<APlayerController>(DeadPawn->GetController());
 	if (PlayerController)
 	{
 		EndGame(false);
 	}
 
+	// Checking if all AI are dead
 	for (AWizardAIController* AIController : TActorRange<AWizardAIController>(GetWorld()))
 	{
 		if (!AIController->IsDead())

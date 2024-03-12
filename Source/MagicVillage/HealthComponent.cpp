@@ -24,7 +24,10 @@ void UHealthComponent::BeginPlay()
 
 	Health = MaxHealth;
 
+	// Setting OnTakeAnyDamage
 	GetOwner()->OnTakeAnyDamage.AddDynamic(this, &UHealthComponent::TakeDamage);
+
+	// Setting GameMode
 	MagicBattleGameMode = Cast<AMagicBattleGameMode>(UGameplayStatics::GetGameMode(this));
 	
 }
@@ -73,10 +76,9 @@ void UHealthComponent::TakeDamage(AActor* DamagedActor, float Damage, const clas
 		APawn* DeadPawn = Cast<APawn>(GetOwner());
 		AWizard* DeadWizard = Cast<AWizard>(GetOwner());
 		MagicBattleGameMode->PawnDied(DeadPawn);
-		FTimerHandle TimerHandle;
 		if (DeadWizard)
 		{
-			GetOwner()->GetWorldTimerManager().SetTimer(TimerHandle, DeadWizard, &AWizard::HandleDeath, 1.0f, false);
+			DeadWizard->HandleDeath();
 		}
 		
 		AWizard* CauserWizard = Cast<AWizard>(DamageCauser->GetOwner()->GetOwner());
@@ -86,4 +88,3 @@ void UHealthComponent::TakeDamage(AActor* DamagedActor, float Damage, const clas
 		}
 	}
 }
-

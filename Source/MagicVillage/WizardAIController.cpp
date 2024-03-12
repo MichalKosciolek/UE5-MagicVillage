@@ -17,8 +17,6 @@ void AWizardAIController::BeginPlay()
 		RunBehaviorTree(BehaviorTree);
 		GetBlackboardComponent()->SetValueAsVector(TEXT("StartLocation"), GetPawn()->GetActorLocation());
 	}
-
-
 }
 
 void AWizardAIController::Tick(float DeltaSeconds)

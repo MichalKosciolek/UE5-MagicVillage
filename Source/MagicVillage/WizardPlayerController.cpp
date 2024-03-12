@@ -8,6 +8,7 @@ void AWizardPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
+	// Creating HUD
 	UUserWidget* HUD = CreateWidget(this, HUDClass);
 	if (HUD)
 	{

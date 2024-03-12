@@ -12,18 +12,22 @@
 // Sets default values
 ASpellProjectileBase::ASpellProjectileBase()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+ 	// Set this actor to call Tick() every frame. You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	// Setting BoxComp
 	BoxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("BoxComp"));
 	RootComponent = BoxComp;
 
+	// Setting SpellMesh
 	SpellMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SpellMesh"));
 	SpellMesh->SetupAttachment(BoxComp);
 
+	// Setting TrailEffect
 	TrailEffect = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("TrailEffect"));
 	TrailEffect->SetupAttachment(BoxComp);
 
+	// Setting ProjectileMovComp
 	ProjectileMovComp = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovComp"));
 	ProjectileMovComp->InitialSpeed = InitialSpeed;
 	ProjectileMovComp->MaxSpeed = MaxSpeed;
@@ -37,10 +41,13 @@ void ASpellProjectileBase::BeginPlay()
 {
 	Super::BeginPlay();
 
+	// Setting delegate
 	BoxComp->OnComponentHit.AddDynamic(this, &ASpellProjectileBase::OnHit);
 	
+	// Setting PlayerActor
 	PlayerActor = Cast<AActor>(UGameplayStatics::GetPlayerCharacter(this, 0));
 
+	// Setting projectile direction
 	if (TargetActor)
 	{
 		if (bIsHoming)
@@ -74,6 +81,7 @@ void ASpellProjectileBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	// Settin limits for projectile life time
 	TimeSinceSpawned += DeltaTime;
 	if (TimeSinceSpawned > MaxLifeTime)
 	{
@@ -129,6 +137,7 @@ void ASpellProjectileBase::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActo
 			UGameplayStatics::PlaySoundAtLocation(this, HitSound, GetActorLocation());
 		}
 
+		// Applying damage
 		AController* MyOwnerInstigator = MyOwner->GetInstigatorController();
 		UClass* DamageType = UDamageType::StaticClass();
 		UGameplayStatics::ApplyDamage(OtherActor, Damage, MyOwnerInstigator, this, DamageType);

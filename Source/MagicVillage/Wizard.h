@@ -77,6 +77,7 @@ protected:
 
 	AActor* TargetActor = nullptr;
 
+	// Input functions
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
 	void LockOnTarget(const FInputActionValue& Value);
@@ -121,7 +122,6 @@ public:
 
 	// Setters
 	void SetIsLockedOnTarget(bool NewIsLockedOnTarget);
-
 	void SetTargetActor(AActor* NewTargetActor);
 
 	void ResetIsCastingSpell();
@@ -131,8 +131,6 @@ public:
 	void AddManaPotion();
 	void AddHealthPotion();
 	AActor* ChooseTargetActor(const TArray<AActor*>& Candidates);
-
-
 
 private:
 
