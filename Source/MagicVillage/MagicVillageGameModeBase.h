@@ -17,6 +17,9 @@ class MAGICVILLAGE_API AMagicVillageGameModeBase : public AGameModeBase
 protected:
 	virtual void BeginPlay() override;
 
+	virtual void HandleGameStart();
+
 public:
 	virtual void PawnDied(APawn* DeadPawn);
+
 };

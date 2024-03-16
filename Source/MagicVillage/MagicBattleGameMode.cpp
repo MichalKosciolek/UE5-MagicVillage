@@ -5,6 +5,9 @@
 #include "EngineUtils.h"
 #include "WizardAIController.h"
 #include "Wizard.h"
+#include "Kismet/GameplayStatics.h"
+#include "WizardPlayerController.h"
+#include "Blueprint/UserWidget.h"
 
 void AMagicBattleGameMode::PawnDied(APawn* DeadPawn)
 {
@@ -30,15 +33,52 @@ void AMagicBattleGameMode::PawnDied(APawn* DeadPawn)
 
 }
 
-void AMagicBattleGameMode::EndGame(bool bIsPlayerWinner)
+void AMagicBattleGameMode::BeginPlay()
 {
-	if (bIsPlayerWinner)
+	Super::BeginPlay();
+
+	HandleGameStart();
+}
+
+void AMagicBattleGameMode::HandleGameStart()
+{
+	Super::HandleGameStart();
+
+	AWizardPlayerController* PlayerController = Cast<AWizardPlayerController>(UGameplayStatics::GetPlayerController(this, 0));
+
+	// Creating Start Screen
+	UUserWidget* StartScreen = CreateWidget(PlayerController, StartScreenClass);
+	if (StartScreen)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Player won"));
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Player lost"));
+		StartScreen->AddToViewport();
 	}
 
+	// Setting timer to enable player input
+	if (PlayerController)
+	{
+		PlayerController->SetPlayerEnabledState(false);
+
+		FTimerHandle PlayerEnableHandle;
+		FTimerDelegate PlayerEnableDelegate = FTimerDelegate::CreateUObject(
+			PlayerController,
+			&AWizardPlayerController::SetPlayerEnabledState,
+			true
+		);
+		GetWorldTimerManager().SetTimer(PlayerEnableHandle, PlayerEnableDelegate, StartDelay, false);
+	}
+}
+
+void AMagicBattleGameMode::EndGame(bool bIsPlayerWinner)
+{
+	for (AController* Controller : TActorRange<AController>(GetWorld()))
+	{
+		if(Controller->IsPlayerController())
+		{
+			Controller->GameHasEnded(Controller->GetPawn(), bIsPlayerWinner);
+		}
+		else
+		{
+			Controller->GameHasEnded(Controller->GetPawn(), !bIsPlayerWinner);
+		}
+	}
 }

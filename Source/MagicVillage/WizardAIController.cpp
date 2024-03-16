@@ -5,7 +5,6 @@
 #include "Wizard.h"
 #include "HealthComponent.h"
 #include "BehaviorTree/BlackboardComponent.h"
-
 #include "Kismet/GameplayStatics.h"
 
 void AWizardAIController::BeginPlay()

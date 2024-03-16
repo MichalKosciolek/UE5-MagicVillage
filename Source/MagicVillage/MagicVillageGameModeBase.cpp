@@ -9,6 +9,10 @@ void AMagicVillageGameModeBase::BeginPlay()
 	Super::BeginPlay();
 }
 
+void AMagicVillageGameModeBase::HandleGameStart()
+{
+}
+
 void AMagicVillageGameModeBase::PawnDied(APawn* DeadPawn)
 {
 }
