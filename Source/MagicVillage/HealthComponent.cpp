@@ -81,7 +81,7 @@ void UHealthComponent::TakeDamage(AActor* DamagedActor, float Damage, const clas
 			DeadWizard->HandleDeath();
 		}
 		
-		AWizard* CauserWizard = Cast<AWizard>(DamageCauser->GetOwner()->GetOwner());
+		AWizard* CauserWizard = Cast<AWizard>(DamageCauser->GetOwner());
 		if (CauserWizard)
 		{
 			CauserWizard->SetIsLockedOnTarget(false);
