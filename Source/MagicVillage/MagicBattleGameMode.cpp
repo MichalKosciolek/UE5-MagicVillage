@@ -21,16 +21,25 @@ void AMagicBattleGameMode::PawnDied(APawn* DeadPawn)
 	}
 
 	// Checking if all AI are dead
+	int Counter = 0;
 	for (AWizardAIController* AIController : TActorRange<AWizardAIController>(GetWorld()))
 	{
 		if (!AIController->IsDead())
 		{
-			return;
+			Counter++;
 		}
 	}
 
-	EndGame(true);
+	NumberOfEnemies = Counter;
+	if (Counter == 0)
+	{
+		EndGame(true);
+	}
+}
 
+int AMagicBattleGameMode::GetNumberOfEnemies() const
+{
+	return NumberOfEnemies;
 }
 
 void AMagicBattleGameMode::BeginPlay()
@@ -65,6 +74,12 @@ void AMagicBattleGameMode::HandleGameStart()
 			true
 		);
 		GetWorldTimerManager().SetTimer(PlayerEnableHandle, PlayerEnableDelegate, StartDelay, false);
+	}
+
+	// Counting Enemies
+	for (AWizardAIController* AIController: TActorRange<AWizardAIController>(GetWorld()))
+	{
+		NumberOfEnemies++;
 	}
 }
 

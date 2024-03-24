@@ -17,6 +17,9 @@ class MAGICVILLAGE_API AMagicBattleGameMode : public AMagicVillageGameModeBase
 public:
 	virtual void PawnDied(APawn* DeadPawn) override;
 
+	UFUNCTION(BlueprintPure)
+	int GetNumberOfEnemies() const;
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -24,6 +27,8 @@ protected:
 
 private:
 	void EndGame(bool bIsPlayerWinner);
+
+	int NumberOfEnemies = 0;
 
 	UPROPERTY(EditAnywhere)
 	float StartDelay = 3.f;
